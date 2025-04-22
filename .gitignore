@@ -1,0 +1,14 @@
+.vs/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+*.apk
+*.aab
+.DS_Store
+*.csproj
+*.sln
+*.user
