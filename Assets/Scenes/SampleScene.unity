@@ -562,7 +562,7 @@ MonoBehaviour:
   moveSpeed: 100
   weapon: {fileID: 8927262340569342276, guid: 246cbce2ade94ed4bb55b62717331849, type: 3}
   shootTransform: {fileID: 1001422444}
-  shootInterval: 0.5
+  shootInterval: 0.3
   ui: {fileID: 1325900263}
 --- !u!50 &291454448
 Rigidbody2D:
@@ -1411,7 +1411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &933682646
 RectTransform:
   m_ObjectHideFlags: 0
