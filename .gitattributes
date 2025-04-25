@@ -1,1 +1,4 @@
-Assets/*.cs linguist-language=C#
+
+*.sharlab linguist-detectable=false
+
+*.cs linguist-language=C#
