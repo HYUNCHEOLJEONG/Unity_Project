@@ -12,73 +12,67 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI manaText;
 
     [Header("Status Values")]
-    private float maxHealth = 100f;
-    private float currentHealth = 100f;
-    private float displayedHealth = 100f;
+    private float maxHealth = 100f; // ìµœëŒ€ ì²´ë ¥
+    private float currentHealth = 100f; // í˜„ì¬ ì²´ë ¥
+    private float displayedHealth = 100f; // í‘œì‹œë˜ëŠ” ì²´ë ¥
 
     private float maxMana = 100f;
     private float currentMana = 100f;
     private float displayedMana = 100f;
 
-    [Header("Lerp Speed")]
+    [Header("Lerp Speed")] // ë³´ê°„ ì†ë„
+    // ë³´ê°„ ì†ë„ëŠ” UIê°€ ì–¼ë§ˆë‚˜ ë¹ ë¥´ê²Œ ì—…ë°ì´íŠ¸ë˜ëŠ”ì§€ë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
     public float lerpSpeed = 5f;
     void Start()
     {
         currentMana = 0f;
-        displayedMana = 0f; // UIµµ Ã³À½¿¡ 0À¸·Î
+        displayedMana = 0f; 
     }
     void Update()
     {
-        // Ã¼·Â°ú ¸¶³ª UI °ª ºÎµå·´°Ô º¯È­
+        
         displayedHealth = Mathf.Lerp(displayedHealth, currentHealth, Time.deltaTime * lerpSpeed);
+        // í™”ë©´ì— í‘œì‹œë˜ëŠ” ì²´ë ¥, ì‹¤ì œ ê²Œì„ì—ì„œì˜ í˜„ì¬ì²´ë ¥
+        // ë¶€ë“œëŸ¬ìš´ ì—ë‹ˆë©”ì´ì…˜ ì†ë„ë¥¼ ì‹œê°„ ê¸°ì¤€ìœ¼ë¡œ ì¡°ì ˆì ˆ
         displayedMana = Mathf.Lerp(displayedMana, currentMana, Time.deltaTime * lerpSpeed);
-
         healthBar.fillAmount = displayedHealth / maxHealth;
+        // displatedHealth =50f,maxHealth=100f -> fillAmount = 0.5f -> 50%ë¡œ ì±„ì›Œì§
         healthText.text = $"HP {Mathf.CeilToInt(displayedHealth)} /{maxHealth}";
-
+        // "HP" ë¬¸ìì—´ ë’¤ì•  displayedHealthë¥¼ ì˜¬ë¦¼
         manaBar.fillAmount = displayedMana / maxMana;
         manaText.text = $"MP {Mathf.CeilToInt(displayedMana)} /{maxMana}";
     }
 
-    // ÇÇÇØ Ã³¸®
+    // 
     public void TakeDamage(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
     }
-
-    // ¸¶³ª »ç¿ë
+    // 0<currentHealth<maxHealth 
+    
     public void UseMana(float amount)
     {
         currentMana = Mathf.Clamp(currentMana - amount, 0, maxMana);
     }
-
-    // Ã¼·Â È¸º¹
-    public void Heal(float amount)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-    }
-
-    // ¸¶³ª È¸º¹
+    /// 0<currentMana<maxMana
     public void RegainMana(float amount)
     {
         currentMana = Mathf.Clamp(currentMana + amount, 0, maxMana);
     }
-
-    // ÇöÀç Ã¼·Â ¹İÈ¯
+  // // 0<currentMana<maxMana
     public float GetCurrentHealth()
     {
         return currentHealth;
     }
-
-    // ÇöÀç ¸¶³ª ¹İÈ¯
+   // í˜„ì¬ ì²´ë ¥ ë°˜í™˜
     public float GetCurrentMana()
     {
         return currentMana;
     }
-
-    // ÃÖ´ë ¸¶³ª ¹İÈ¯
+  //  í˜„ì¬ ë§ˆë‚˜ ë°˜í™˜ (private ë³€ìˆ˜ë•œì—)
     public float GetMaxMana()
     {
         return maxMana;
     }
+    // ìµœëŒ€ ë§ˆë‚˜ ë°˜í™˜(private ë³€ìˆ˜ ë•œì—)
 }

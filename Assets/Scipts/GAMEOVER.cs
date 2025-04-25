@@ -5,9 +5,9 @@ public class GameOver : MonoBehaviour
 {
     [Header("UI Components")]
     [SerializeField]
-    private TextMeshProUGUI gameOverText;  // °ÔÀÓ ¿À¹ö ÅØ½ºÆ® UI
+    private TextMeshProUGUI gameOverText;  // Game Over text UI
     [SerializeField]
-    private Player player;  // ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ® ÂüÁ¶
+    private Player player;  // // í”Œë ˆì´ì–´ ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°
 
     private bool isGameOver = false;
 
@@ -15,15 +15,15 @@ public class GameOver : MonoBehaviour
     {
         if (gameOverText != null)
         {
-            gameOverText.gameObject.SetActive(false);  // ½ÃÀÛ ½Ã¿¡´Â °ÔÀÓ ¿À¹ö ÅØ½ºÆ® ¼û±è
-        }
+            gameOverText.gameObject.SetActive(false);  
+        }      
     }
 
     void Update()
     {
         if (player != null && player.ui != null)
         {
-            // ÇÃ·¹ÀÌ¾îÀÇ Ã¼·ÂÀÌ 0 ÀÌÇÏÀÏ ¶§ °ÔÀÓ ¿À¹ö Ã³¸®
+          
             if (player.ui.GetCurrentHealth() <= 0 && !isGameOver)
             {
                 GameOverSequence();
@@ -31,18 +31,15 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    // °ÔÀÓ ¿À¹ö ½Ã È£ÃâµÇ´Â ÇÔ¼ö
-    void GameOverSequence()
+    void GameOverSequence() // ê²Œì„ ì˜¤ë²„ ìƒíƒœê°€ ë˜ë©´ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜ìˆ˜
     {
         isGameOver = true;
 
-        // °ÔÀÓ ¿À¹ö ÅØ½ºÆ® È°¼ºÈ­
         if (gameOverText != null)
         {
-            gameOverText.gameObject.SetActive(true);  // °ÔÀÓ ¿À¹ö ÅØ½ºÆ® Ç¥½Ã
+            gameOverText.gameObject.SetActive(true);  // Game Over í…ìŠ¤íŠ¸ í™œì„±í™”
         }
 
-        // °ÔÀÓ ÀÏ½Ã Á¤Áö
-        Time.timeScale = 0f;  // °ÔÀÓ ÀÏ½Ã Á¤Áö
+        Time.timeScale = 0f;  // ì‹œê°„ì˜ íë¦„ì„ ë©ˆì¶¤
     }
 }

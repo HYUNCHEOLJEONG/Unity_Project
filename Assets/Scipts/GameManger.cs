@@ -5,16 +5,16 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     [Header("UI Components")]
-    [SerializeField] private TextMeshProUGUI readyText;  // READY ÅØ½ºÆ® UI
-    [SerializeField] private TextMeshProUGUI startText;  // START ÅØ½ºÆ® UI
-    [SerializeField] private float readyTime = 2f;  // READY ÅØ½ºÆ® Áö¼Ó ½Ã°£
-    [SerializeField] private float startTime = 1f;  // START ÅØ½ºÆ® Áö¼Ó ½Ã°£
-    [SerializeField] private TextMeshProUGUI roundText; // ¶ó¿îµå ÅØ½ºÆ® UI
-    [SerializeField] private float roundTextTime = 1f; // ¶ó¿îµå Ç¥½Ã ½Ã°£
-    private bool isGameEnded = false;
-    private bool isGameStarted = false;
+    [SerializeField] private TextMeshProUGUI readyText;  // READY text UI
+    [SerializeField] private TextMeshProUGUI startText;  // START text UI
+    [SerializeField] private float readyTime = 2f;  // READY  í‘œì‹œ ì‹œê°„
+    [SerializeField] private float startTime = 1f;  // START  í‘œì‹œ ì‹œê°„
+    [SerializeField] private TextMeshProUGUI roundText; // ROUND text UI
+    [SerializeField] private float roundTextTime = 1f; // ROUND text í‘œì‹œ ì‹œê°„
+    private bool isGameEnded = false; // ê²Œì„ì´ ì¢…ë£Œë˜ì—ˆëŠ”ì§€ ì²´í¬í•˜ëŠ” ë³€ìˆ˜
+    private bool isGameStarted = false; // ê²Œì„ì´ ì‹œì‘ë˜ì—ˆëŠ”ì§€ ì²´í¬í•˜ëŠ” ë³€ìˆ˜
     [Header("Game Settings")]
-    [SerializeField] private Player player;  // ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ® ÂüÁ¶
+    [SerializeField] private Player player;  // í”Œë ˆì´ì–´ ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°
     private bool gameStarted = false;
 
     void Start()
@@ -22,14 +22,14 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         if (readyText != null && startText != null)
         {
-            readyText.gameObject.SetActive(true);  // READY ÅØ½ºÆ® º¸ÀÌ±â
-            startText.gameObject.SetActive(false);  // START ÅØ½ºÆ® ¼û±â±â
+            readyText.gameObject.SetActive(true);  
+            startText.gameObject.SetActive(false); // ì‹œì‘í•  ë•ŒëŠ” START í…ìŠ¤íŠ¸ë¥¼ ë¹„í™œì„±í™”
         }
 
         if (player != null)
         {
-            // °ÔÀÓ ½ÃÀÛ Àü ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ®¸¦ ºñÈ°¼ºÈ­
-            player.enabled = false;  // µå·¡°ïÀÇ ½ºÅ©¸³Æ® ºñÈ°¼ºÈ­ (ÀÌµ¿ÇÏÁö ¾Êµµ·Ï)
+         
+            player.enabled = false;  // í”Œë ˆì´ì–´ ìŠ¤í¬ë¦½íŠ¸ ë¹„í™œì„±í™”
         }
 
         StartCoroutine(GameStartSequence());
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameStartSequence()
     {
-        yield return new WaitForSeconds(readyTime);
+        yield return new WaitForSeconds(readyTime); // readyTimeë§Œí¼ ëŒ€ê¸°
 
         if (readyText != null)
         {
@@ -60,10 +60,10 @@ public class GameManager : MonoBehaviour
             startText.gameObject.SetActive(false);
         }
 
-        // °ÔÀÓ ½ÃÀÛ ÈÄ ÇÃ·¹ÀÌ¾îÀÇ ½ºÅ©¸³Æ® È°¼ºÈ­
+    
         if (player != null)
         {
-            player.enabled = true;  // µå·¡°ïÀÇ ½ºÅ©¸³Æ® È°¼ºÈ­
+            player.enabled = true;  // í”Œë ˆì´ì–´ ìŠ¤í¬ë¦½íŠ¸ í™œì„±í™”
         }
 
         gameStarted = true;
@@ -74,18 +74,16 @@ public class GameManager : MonoBehaviour
         roundText.text = text;
         roundText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(roundTextTime);
+        yield return new WaitForSeconds(roundTextTime); // ROUND í…ìŠ¤íŠ¸ í‘œì‹œ ì‹œê°„
 
         roundText.gameObject.SetActive(false);
 
-        onComplete?.Invoke(); // ³¡³µÀ¸¸é Äİ¹é ½ÇÇà
+        onComplete?.Invoke(); // ì½œë°± í•¨ìˆ˜ ì‹¤í–‰
     }
     public void EndGame()
     {
-        if (isGameEnded) return; // Áßº¹ ¹æÁö
+        if (isGameEnded) return; // ì´ë¯¸ ê²Œì„ì´ ì¢…ë£Œëœ ê²½ìš° í•¨ìˆ˜ ì¢…ë£Œ
         isGameEnded = true;
-        Debug.Log("Game Over - WIN");
-        // ÇÊ¿ä½Ã ¾À ÀüÈ¯ ¶Ç´Â ¹öÆ° È°¼ºÈ­ µî Ã³¸®
     }
     public bool IsGameEnded()
     {

@@ -4,16 +4,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     public float movespeed;
-    private float minY = -44.1f; // ÀûÀÌ »ç¶óÁö´Â À§Ä¡
+    private float minY = -44.1f; // ì ì´ yì¶• ê¸°ì¤€ìœ¼ë¡œ -44.1ì— ë„ë‹¬í•˜ë©´
+                                 // ì  ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚­ì œ
     [SerializeField]
-    private float hp;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float hp; // ì ì˜ ì²´ë ¥ - > UNITY ì¸ìŠ¤í™í„°ì—ì„œ ì¡°ì • ê°€ëŠ¥
+
     void Start()
     {
-        Debug.Log("Enemy Start with Speed: " + movespeed);
-    }
 
-    // Update is called once per frame
+    }
+    // ì ì´ ë„ˆë¬´ ì•„ë˜ë¡œ ë‚´ë ¤ê°€ë©´-> í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ê²Œ ë˜ë©´ íŒŒê´´
     void Update()
     {
         transform.position += Vector3.down * movespeed * Time.deltaTime;
@@ -22,43 +22,38 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
       
-
     }
+    // ì„¤ì • í•¨ìˆ˜ 1. SetSpeed
+    //1 => ì ì˜ ì†ë„ë¥¼ ê²°ì •
     public void SetSpeed(float speed)
     {
         this.movespeed = speed;
     }
-
+    // ì„¤ì • í•¨ìˆ˜ 2. SetHP
+    //2 => ì ì˜ ì²´ë ¥ì„ ê²°ì •
     public void SetHP(float hp)
     {
         this.hp = hp;
     }
+
+    // ì¶©ëŒ ì²˜ë¦¬ í•¨ìˆ˜
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ãæµ¹ °¨ÁöµÊ: " + collision.name); // Ãæµ¹ ¿ÀºêÁ§Æ® ÀÌ¸§ Ãâ·Â
 
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Weapon")  // ì¶©ëŒí•œê²Œ "Weapon"íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ ì¼ ê²½ìš°
         {
-            Debug.Log("¹«±â Ãæµ¹!"); // ¹«±âÀÎ °æ¿ì È®ÀÎ
-
-            Weapon weapon = collision.gameObject.GetComponent<Weapon>();
+            Weapon weapon = collision.gameObject.GetComponent<Weapon>(); //ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì—ì„œ Weapon ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜´
             if (weapon != null)
             {
-                Debug.Log("µ¥¹ÌÁö: " + weapon.damage); // µ¥¹ÌÁö °ª È®ÀÎ
                 hp -= weapon.damage;
                 if (hp <= 0)
                 {
-                    Debug.Log("Àû ÆÄ±«!");
-                    Destroy(gameObject);
+                   
+                    Destroy(gameObject); // ì  ì˜¤ë¸Œì íŠ¸ íŒŒê´´
                 }
-                Destroy(collision.gameObject);
+                Destroy(collision.gameObject); // ë¬´ê¸° ì˜¤ë¸Œì íŠ¸ íŒŒê´´
             }
-            else
-            {
-                Debug.LogWarning("Weapon ½ºÅ©¸³Æ® ¾øÀ½!");
-            }
+          
         }
     }
-
-
 }

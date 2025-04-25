@@ -3,23 +3,24 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    private float movespeed = 20f; // ÃÑ¾Ë ¼Óµµ
+    private float movespeed = 20f; // ì´ì•Œ ì†ë„
     public float damage = 16f;
    
     private void Start()
     {
-        Destroy(gameObject, 3f); // 3ÃÊ ÈÄ ÃÑ¾Ë »èÁ¦
+        Destroy(gameObject, 3f); // 3ì´ˆ í›„ì— ì˜¤ë¸Œì íŠ¸ íŒŒê´´
+                                 // í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ê¸° ë•Œë¬¸ë¬¸
     }
 
     private void Update()
     {
+        //transform.position(ì ˆëŒ€ì  ì´ë™)
+        //transform.Translate(ìƒëŒ€ì  ì´ë™)
         transform.Translate(Time.deltaTime * movespeed * Vector3.up);
     }
-
-    // È¸ÀüÀº À¯´ÏÆ¼¿¡¼­ ¼³Á¤ÇÑ °ª ±×´ë·Î À¯ÁöÇÏ±â À§ÇØ SetDirectionÀº ºó ÇÔ¼ö·Î µÒ
     public void SetDirection(Quaternion rotation)
     {
-       
-        // ¾Æ¹«°Íµµ ¾È ÇÔ! È¸ÀüÀº À¯´ÏÆ¼ ¿¡µğÅÍ¿¡¼­ ¼³Á¤ÇÑ ´ë·Î¸¸ »ç¿ë
+
+        // ì•„ë¬´ê²ƒë„ ì•ˆ í•¨! íšŒì „ì€ ìœ ë‹ˆí‹° ì—ë””í„°ì—ì„œ ì„¤ì •í•œ ëŒ€ë¡œë§Œ ì‚¬ìš©
     }
 }

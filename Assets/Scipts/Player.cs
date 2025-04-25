@@ -5,9 +5,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
-    private GameObject weapon; // ÃÑ¾Ë ÇÁ¸®ÆÕ
+    private GameObject weapon; // 
     [SerializeField]
-    private Transform shootTransform; // µå·¡°ï ¸Ó¸® À§Ä¡
+    private Transform shootTransform; // 
     [SerializeField]
     private float shootInterval = 0.1f;
 
@@ -19,45 +19,37 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (Camera.main == null)
-            Debug.LogError("Main Camera is not assigned or missing the 'MainCamera' tag.");
-
-        if (weapon == null)
-            Debug.LogError("Weapon is not assigned!");
-
-        if (shootTransform == null)
-            Debug.LogError("ShootTransform is not assigned!");
+      
     }
 
     void Update()
     {
         HandleMovement();
 
-        // ¸¶³ª°¡ 100 ÀÌ»óÀÏ ¶§¸¸ Æ®¸®ÇÃ¼¦ ¹ßµ¿
         if (!isTripleShot && ui.GetCurrentMana() >= 100f)
         {
             isTripleShot = true;
-            tripleShotEndTime = Time.time + 10f;  // 10ÃÊ°£ Æ®¸®ÇÃ ¼¦ À¯Áö
-            ui.UseMana(100f); // ¸¶³ª ¼Ò¸ð
+            tripleShotEndTime = Time.time + 10f;  // 
+            ui.UseMana(100f); // 
         }
 
-        // Æ®¸®ÇÃ ¼¦ÀÌ È°¼ºÈ­µÇ¾úÀ» ¶§¸¸ Æ®¸®ÇÃ ¼¦À» ¹ß»ç
+        // 
         if (isTripleShot)
         {
             if (Time.time <= tripleShotEndTime)
-                TripleShoot();  // Æ®¸®ÇÃ ¼¦ ÀÚµ¿ ¹ß»ç
+                TripleShoot();  // 
             else
-                isTripleShot = false;  // 10ÃÊ Áö³ª¸é Æ®¸®ÇÃ ¼¦ ÇØÁ¦
+                isTripleShot = false;  
         }
 
-        // Æ®¸®ÇÃ ¼¦ÀÌ ¾Æ´Ò ¶§ ¸¶¿ì½º Å¬¸¯À¸·Î¸¸ ÃÑ¾Ë ¹ß»ç
+      
         if (!isTripleShot && Input.GetMouseButton(0))
         {
-            Shoot();  // ±âº» ÃÑ¾Ë ¹ß»ç
+            Shoot();  
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î ÀÌµ¿ Ã³¸®
+    //
     void HandleMovement()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -70,14 +62,14 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }
 
-    // Æ®¸®ÇÃ ¼¦ ¹ß»ç
+    //
     void TripleShoot()
     {
         if (Time.time - lastShotTime > shootInterval)
         {
             Vector3 basePos = shootTransform.position;
 
-            // µå·¡°ï ¸Ó¸® ¹æÇâÀ» ±âÁØÀ¸·Î ¹ß»ç °¢µµ ¼³Á¤
+            // 
             CreateBullet(basePos, shootTransform.rotation.eulerAngles.z + 45f);
             CreateBullet(basePos, shootTransform.rotation.eulerAngles.z);
             CreateBullet(basePos, shootTransform.rotation.eulerAngles.z - 45f);
@@ -86,27 +78,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    // ±âº» ÃÑ¾Ë ¹ß»ç (µå·¡°ï ¸Ó¸® ¹æÇâÀ¸·Î ¹ß»ç)
+    //
     void Shoot()
     {
         if (Time.time - lastShotTime > shootInterval)
         {
             Vector3 basePos = shootTransform.position;
 
-            // µå·¡°ï ¸Ó¸® ¹æÇâÀ» ±×´ë·Î »ç¿ëÇÏ¿© ¹ß»ç
-            Quaternion rotation = shootTransform.rotation;  // µå·¡°ï ¸Ó¸® È¸Àü
+          
+            Quaternion rotation = shootTransform.rotation;  //
 
-            // È¸Àü°ªÀ» -90µµ È¸Àü½ÃÄÑ¼­ ÃÑ¾ËÀÌ À§ÂÊÀ¸·Î ¹ß»çµÇµµ·Ï ¼öÁ¤
+            // 
             rotation *= Quaternion.Euler(0, 0, 0f);
 
             GameObject bullet = Instantiate(weapon, basePos, rotation);
 
-            // WeaponÀÇ SetDirection ¸Þ¼­µå¸¦ »ç¿ëÇÏ¿© ÃÑ¾ËÀÇ È¸Àü ¹æÇâÀ» µå·¡°ï ¸Ó¸® È¸ÀüÀ¸·Î ¼³Á¤
+            // 
             bullet.GetComponent<Weapon>().SetDirection(rotation);
 
+                //
             if (Time.time - lastShotTime > shootInterval)
             {
-                // ÃÑ¾Ë ¹ß»ç
+               
                 lastShotTime = Time.time;
             }
             lastShotTime = Time.time;
@@ -115,7 +108,7 @@ public class Player : MonoBehaviour
 
     void CreateBullet(Vector3 position, float angle)
     {
-        Quaternion rotation = Quaternion.Euler(0, 0, angle); // °¢µµ¿¡ ¸Â°Ô È¸Àü
+        Quaternion rotation = Quaternion.Euler(0, 0, angle); // 
         GameObject bullet = Instantiate(weapon, position, rotation);
         if (bullet != null)
         {
@@ -127,12 +120,12 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            ui.TakeDamage(20f); // Àû°ú Ãæµ¹ ½Ã µ¥¹ÌÁö
+            ui.TakeDamage(20f); // 
         }
-        else if (collision.CompareTag("Potion")) // Æ÷¼Ç°ú Ãæµ¹ ½Ã
+        else if (collision.CompareTag("Potion")) // 
         {
-            ui.RegainMana(ui.GetMaxMana() * 100f); // ¸¶³ª 20% È¸º¹
-            Destroy(collision.gameObject);         // Æ÷¼Ç Á¦°Å
+            ui.RegainMana(ui.GetMaxMana() * 100f); // 
+            Destroy(collision.gameObject);         // 
         }
     }
 }
@@ -142,13 +135,13 @@ public class Player : MonoBehaviour
 //Debug.log(Input.mousePosition);
 //void Update()
 //{
-//    // ¸¶¿ì½º À§Ä¡¸¦ ¿ùµå ÁÂÇ¥·Î º¯È¯
+//    // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½È¯
 //    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-//    // X¿Í Y À§Ä¡¸¦ Á¦ÇÑ (Clamp)
+//    // Xï¿½ï¿½ Y ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (Clamp)
 //    float clampedX = Mathf.Clamp(mousePos.x, -2.72f, 2.72f);
-//    float clampedY = Mathf.Clamp(mousePos.y, -4.5f, 4.5f); // Y ¹üÀ§´Â ÇÊ¿ä¿¡ µû¶ó Á¶ÀýÇÏ¼¼¿ä
+//    float clampedY = Mathf.Clamp(mousePos.y, -4.5f, 4.5f); // Y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 
-//    // Z´Â ÇöÀç ¿ÀºêÁ§Æ®ÀÇ Z°ª À¯Áö
+//    // Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //    transform.position = new Vector3(clampedX, clampedY, transform.position.z);
 //}

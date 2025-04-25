@@ -1,7 +1,7 @@
 using UnityEngine;
 // Unity 엔진 기능들을 가져오는 선언
 // MonoBehaviour,Vecotr3,Time,transform 등 유니티 기능을
-// 사용하려면 필요 엔진 구조조
+// 사용하려면 필요 엔진 구조
 
 public class BackgroundScroller : MonoBehaviour
 // BackgroundScroller라는 클래스를 정의
