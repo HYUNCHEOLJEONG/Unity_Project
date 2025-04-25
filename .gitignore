@@ -10,3 +10,4 @@ UserSettings/
 *.aab
 .DS_Store
 *.user
+*.shader
