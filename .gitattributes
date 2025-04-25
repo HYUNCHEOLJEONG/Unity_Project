@@ -1,4 +1,3 @@
-Assets/*.cs linguist-language=C#
-*.shader linguist-language=ShaderLab
-*.sharlab linguist-detectable=false
+*.shader linguist-detectable=false
 *.unity linguist-detectable=false
+Assets/*.cs linguist-language=C#
