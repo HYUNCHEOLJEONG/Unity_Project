@@ -1,4 +1,0 @@
-
-*.sharlab linguist-detectable=false
-
-*.cs linguist-language=C#
