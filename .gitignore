@@ -11,4 +11,4 @@ UserSettings/
 .DS_Store
 *.user
 *.shader
-*.HLSL
+*.cginc
