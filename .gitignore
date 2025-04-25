@@ -9,6 +9,4 @@ UserSettings/
 *.apk
 *.aab
 .DS_Store
-*.csproj
-*.sln
 *.user
