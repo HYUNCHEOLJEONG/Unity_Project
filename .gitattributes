@@ -1,1 +1,1 @@
-*.cs linguist-language=C#
+Assets/*.cs linguist-language=C#
