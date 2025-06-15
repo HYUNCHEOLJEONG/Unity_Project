@@ -1,3 +1,12 @@
+# C# 코드가 주 언어임을 명시
+*.cs linguist-language=C#
+
+# Unity 관련 파일들이 언어로 잡히는 걸 방지
 *.shader linguist-detectable=false
-*.unity linguist-detectable=false
-Assets/*.cs linguist-language=C#
+*.cginc linguist-detectable=false
+*.hlsl linguist-detectable=false
+*.compute linguist-detectable=false
+*.shadergraph linguist-detectable=false
+
+# Unity 메타 파일 무시
+*.meta linguist-detectable=false
