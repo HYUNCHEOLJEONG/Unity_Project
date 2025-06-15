@@ -64,11 +64,18 @@
 ## 시연 이미지
 
 > 📸 아래는 실제 플레이 장면입니다
-**1**
-![Scene1](Images/Scene1.png)  
-**2**
+**장면 1**
+
+![Scene1](Images/Scene1.png)
+
+
+**장면 2**
+
+
 ![Scene2](Images/Scene2.png)  
-**3**
+**장면 3**
+
+
 ![Scene3](Images/Scene3.png)  
 
 ---
